@@ -14,8 +14,7 @@ TIMEOUT = 15
 
 def message_input(driver):
   message_box = WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located( ( By.XPATH, '//*[@id="message"]' ) ))
-  message_box.send_keys("Hi Papaya!\nThis message was delivered by a script I wrote using Selenium, which you can find on my github at https://github.com/MooseandSquvirrel/hi_papaya - I used a virtual environment if you'd like to test it with pipenv, make sure to have chromedriver on your PATH.\nMy name is Andy Gardner and I'm currently interning at 42 Silicon Valley, a non-profit coding school. I applied to your New Grad Software Engineer role for the Selenium script developer. I believe my experience writing Selenium scripts makes a good candidate for this role. So I thought I'd show it with a quick script I just wrote in a couple minutes. I like automating tasks and this roles seems like a great fit. \n\nHope to hear from you soon!\n\nBest,\nAndy :)")
-  sleep(20)
+  message_box.send_keys("Hi Papaya!\n\nThis message was delivered by a script I wrote using Selenium, which you can find on my github at https://github.com/MooseandSquvirrel/hi_papaya - I used a virtual environment if you'd like to test it with pipenv, make sure to have chromedriver on your PATH.\nMy name is Andy Gardner and I'm currently interning at 42 Silicon Valley, a non-profit coding school. I applied to your New Grad Software Engineer role for the Selenium script developer. I believe my experience writing Selenium scripts makes a good candidate for this role. So I thought I'd show it with a quick script I just wrote in a couple minutes. I like automating tasks and this roles seems like a great fit. \n\nHope to hear from you soon!\n\nBest,\nAndy :)")
 
 def email_input(email, driver):
   email_box = WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located( ( By.XPATH, '//*[@id="contact-form"]/div[1]/div[2]/div/input' ) ))
@@ -25,10 +24,16 @@ def name_input(full_name, driver):
 	email_box = WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located( ( By.XPATH, '//*[@id="contact-form"]/div[1]/div[1]/div/input' ) ))
 	email_box.send_keys(full_name)
 
+def click_send(driver):
+	button = WebDriverWait(driver, TIMEOUT).until(EC.visibility_of_element_located( ( By.XPATH, '//*[@id="contact-form"]/button' ) ))
+	button.click()
+	sleep(20)
+
 def input_info(full_name, email, driver):
   name_input(full_name, driver)
   email_input(email, driver)
   message_input(driver)
+  click_send(driver)
 
 def commandline():
   full_name_check = ''
